@@ -1,14 +1,6 @@
 /**
- * Portfolio Data Configuration
- * 
- * Edit this file freely to add, remove, or modify:
- * - Designer information, bio, and contact links (Email, Phone, WhatsApp)
- * - CV skills, programs/software toolkit, and work experience
- * - Projects, case study sections (Concept, Ideation, Design Process, Materials, Final Product)
- * - Videography films and showreels
- * 
- * The right sidebar navigation and scroll tracker automatically synchronize
- * with the projects and sections configured here.
+ * Portfolio Data Configuration - Pablo Cobián
+ * Industrial Designer & Creative
  */
 
 export interface SoftwareTool {
@@ -22,6 +14,7 @@ export interface SoftwareTool {
 }
 
 export interface Competency {
+  number: string;
   title: string;
   description: string;
   percentage: number;
@@ -33,12 +26,21 @@ export interface ExperienceItem {
   company: string;
   location: string;
   description: string;
+  highlight?: boolean;
+}
+
+export interface EducationItem {
+  institution: string;
+  degree: string;
+  period: string;
+  location: string;
+  description: string;
 }
 
 export interface ProjectSubSection {
-  id: string; // e.g., 'concept', 'ideation', 'design-process', 'final-product'
-  label: string; // Displayed in sidebar (e.g., 'Concept')
-  title: string; // Heading displayed in main page
+  id: string;
+  label: string;
+  title: string;
   description?: string;
   boldKeywords?: string[];
   image?: string;
@@ -55,7 +57,7 @@ export interface ProjectSubSection {
 
 export interface PortfolioProject {
   id: string;
-  number: string; // '01', '02', '03'
+  number: string;
   title: string;
   subtitle: string;
   heroImage: string;
@@ -72,20 +74,30 @@ export interface VideoProject {
   role: string;
   description: string;
   videoUrl?: string;
+  youtubeId?: string;
   posterImage: string;
   aspectRatio: string;
+  tags?: string[];
 }
 
 export interface PortfolioData {
   designer: {
     name: string;
     titles: string[];
+    titlePrimary: string;
     email: string;
     phone: string;
+    phoneRaw: string;
     whatsappUrl: string;
     location: string;
+    workMode: string;
     whoAmIParagraph: string;
     whoAmIBoldWords: string[];
+    secondaryBio: string;
+    practicePillars: {
+      category: string;
+      items: string;
+    }[];
   };
   cv: {
     eyebrow: string;
@@ -93,6 +105,7 @@ export interface PortfolioData {
     subtitle: string;
     competencies: Competency[];
     softwareTools: SoftwareTool[];
+    education: EducationItem[];
     experience: ExperienceItem[];
   };
   projects: PortfolioProject[];
@@ -109,59 +122,82 @@ import petPodDiagramImg from '@/src/assets/images/pet_pod_materials_diagram_1790
 
 export const portfolioData: PortfolioData = {
   designer: {
-    name: "Pablo Cobian",
-    titles: ["Industrial Designer", "Creative Videographer"],
+    name: "Pablo Cobián",
+    titles: ["Industrial Designer & Creative"],
+    titlePrimary: "Industrial Designer & Creative",
     email: "cobian.borobia.pablo@gmail.com",
-    phone: "+34 600 000 000",
+    phone: "+52 442 255 3528",
+    phoneRaw: "4422553528",
     whatsappUrl: "https://w.app/pablocobian",
-    location: "Madrid / Barcelona, Spain",
+    location: "Querétaro, Mexico",
+    workMode: "Freelance / Independent",
     whoAmIParagraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    whoAmIBoldWords: ["dolor", "tempor incididunt"],
+      "I design products with identity, functionality, and lasting character. I believe good design should solve problems without losing the beauty, personality, and human connection that make an object worth keeping.",
+    whoAmIBoldWords: [
+      "identity, functionality, and lasting character",
+      "beauty, personality, and human connection",
+    ],
+    secondaryBio:
+      "I’m an Industrial Designer based in Querétaro, Mexico, with a background in product development, materials, ergonomics, and design methodologies. My work spans product and furniture design, branding, visual communication, and entrepreneurship across freelance collaborations and my own ventures, particularly Vigía.",
+    practicePillars: [
+      {
+        category: "PRODUCT DESIGN",
+        items: "Product development · Furniture · Materials · Prototyping · Manufacturing",
+      },
+      {
+        category: "BRAND & ENTREPRENEURSHIP",
+        items: "Vigía · Branding · Product positioning · E-commerce · Marketing",
+      },
+      {
+        category: "VISUAL COMMUNICATION",
+        items: "Photography · Videography · FPV · 3D visualization · Storytelling",
+      },
+    ],
   },
 
   cv: {
     eyebrow: "CURRICULUM VITAE",
     title: "Strengths and Experience",
     subtitle:
-      "Bridging physical fabrication, digital CAD sculpting, and human factors into viable mass-manufacturable products.",
+      "Bridging physical prototyping, advanced CAD surface modeling, ergonomics, and visual storytelling into character-driven products.",
     competencies: [
       {
-        title: "Industrial Design & Form Generation",
+        number: "01",
+        title: "Product & Industrial Design",
         description:
-          "Translating emotional concepts into balanced proportions and tactile geometry.",
-        percentage: 94,
+          "Developing products from research and concept development through form, materials, ergonomics, prototyping, and final presentation.",
+        percentage: 90,
       },
       {
-        title: "Parametric CAD & Surface Modeling",
+        number: "02",
+        title: "3D Modeling & Visualization",
         description:
-          "Advanced surfacing in Rhino 8, Fusion 360, and SolidWorks with class-A continuity.",
-        percentage: 91,
-      },
-      {
-        title: "Design for Manufacturing (DFM) & Prototyping",
-        description:
-          "Rapid tooling, vacuum casting, CNC milling, injection mold constraints, and slip-casting.",
-        percentage: 88,
-      },
-      {
-        title: "CMF & Sustainable Material Sourcing",
-        description:
-          "Specifying ceramics, bio-polymers, FSC-woods, and tactile post-processing finishes.",
+          "Translating concepts into detailed 3D models, renders, and visual presentations for communicating design intent.",
         percentage: 85,
+      },
+      {
+        number: "03",
+        title: "Concept Development & Problem Solving",
+        description:
+          "Researching problems, generating concepts, exploring alternatives, and developing practical solutions with a strong design rationale.",
+        percentage: 85,
+      },
+      {
+        number: "04",
+        title: "Branding & Visual Communication",
+        description:
+          "Developing visual identities, product positioning, photography, video, and presentation systems around physical products and brands.",
+        percentage: 90,
+      },
+      {
+        number: "05",
+        title: "Prototyping & Fabrication",
+        description:
+          "Building and refining physical prototypes using woodworking, CNC, laser engraving, molding, and other fabrication processes.",
+        percentage: 80,
       },
     ],
     softwareTools: [
-      {
-        id: "ps",
-        name: "Photoshop",
-        shortTag: "Ps",
-        color: "#001e36",
-        textColor: "#31a8ff",
-        level: "ADVANCED",
-        description:
-          "Photoshop: High-resolution texture mapping, CMF composite rendering, and post-production retouching.",
-      },
       {
         id: "ai",
         name: "Illustrator",
@@ -170,7 +206,17 @@ export const portfolioData: PortfolioData = {
         textColor: "#ff9a00",
         level: "ADVANCED",
         description:
-          "Illustrator: Vector technical schematics, scale orthographic drawings, iconography, and graphic packaging.",
+          "Vector graphics, branding, technical illustrations and visual communication.",
+      },
+      {
+        id: "ps",
+        name: "Photoshop",
+        shortTag: "Ps",
+        color: "#001e36",
+        textColor: "#31a8ff",
+        level: "ADVANCED",
+        description:
+          "Image editing, product visualization, compositing and presentation graphics.",
       },
       {
         id: "acad",
@@ -178,9 +224,9 @@ export const portfolioData: PortfolioData = {
         shortTag: "A",
         color: "#fce8e6",
         textColor: "#e11900",
-        level: "PROFICIENT",
+        level: "ADVANCED",
         description:
-          "AutoCAD: Architectural floor clearance, dimensional shop drawings, and production laser cutting files.",
+          "2D technical drawings, dimensioned plans and detailed documentation.",
       },
       {
         id: "sw",
@@ -190,7 +236,7 @@ export const portfolioData: PortfolioData = {
         textColor: "#ea1d24",
         level: "EXPERT",
         description:
-          "SolidWorks: Complex mechanical assemblies, parametric engineering, mold tooling analysis, and draft verification.",
+          "Detailed 3D modeling, mechanical design, assemblies and technical development.",
       },
       {
         id: "rhino",
@@ -198,9 +244,9 @@ export const portfolioData: PortfolioData = {
         shortTag: "Rh",
         color: "#2b2b2b",
         textColor: "#ffffff",
-        level: "EXPERT",
+        level: "ADVANCED",
         description:
-          "Rhino 8: SubD organic freeform sculpting, NURBS curvature continuity (G2/G3), and Grasshopper computational patterns.",
+          "3D modeling, form development, product design and complex geometry.",
       },
       {
         id: "f360",
@@ -208,9 +254,9 @@ export const portfolioData: PortfolioData = {
         shortTag: "F360",
         color: "#fff1e6",
         textColor: "#ea7125",
-        level: "ADVANCED",
+        level: "PROFICIENT",
         description:
-          "Fusion 360: Generative design exploration, 3-axis CNC CAM toolpath preparation, and collaborative parametric iterations.",
+          "CAD modeling, prototyping, technical development and manufacturing preparation.",
       },
       {
         id: "dvr",
@@ -218,9 +264,9 @@ export const portfolioData: PortfolioData = {
         shortTag: "DVR",
         color: "#161c28",
         textColor: "#ff4757",
-        level: "ADVANCED",
+        level: "EXPERT",
         description:
-          "DaVinci Resolve: Node-based color grading, cinematic 35mm film emulation, audio mastering, and narrative video pacing.",
+          "Advanced color grading, video editing, compositing and visual production.",
       },
       {
         id: "pr",
@@ -228,35 +274,62 @@ export const portfolioData: PortfolioData = {
         shortTag: "Pr",
         color: "#270038",
         textColor: "#ea77ff",
-        level: "ADVANCED",
+        level: "PROFICIENT",
         description:
-          "Adobe Premiere: High-throughput video assembly, sound synchronization, dynamic cuts, and showreel delivery.",
+          "Video editing and visual production.",
+      },
+    ],
+    education: [
+      {
+        institution: "Universidad Anáhuac Querétaro",
+        degree: "Bachelor's Degree in Industrial Design",
+        period: "2023 — Present",
+        location: "Querétaro, México",
+        description:
+          "Studies focused on product development, materials, ergonomics, design methodologies, prototyping, and visual communication.",
+      },
+      {
+        institution: "Universidad Jaume I",
+        degree: "Industrial Design Engineering and Product Development",
+        period: "2021 — 2023",
+        location: "Valencia, Spain",
+        description:
+          "Completed two years of Industrial Design Engineering before returning to Mexico and continuing studies in Industrial Design.",
       },
     ],
     experience: [
       {
-        period: "2023 — Present",
-        role: "Lead Industrial Designer & CMF Strategist",
-        company: "Studio Cobian / Independent Practice",
-        location: "Madrid, Spain",
+        period: "December 2025 — Present",
+        role: "Co-Founder / Industrial Designer",
+        company: "VIGÍA",
+        location: "Querétaro, Mexico",
+        highlight: true,
         description:
-          "Leading end-to-end product design cycles from raw conceptual sketches through DFM handoff for consumer hardware, domestic lighting, and bespoke furniture.",
+          "Developing a Mexican watch microbrand from concept to physical product, working across product design, branding, customization, photography, marketing, e-commerce, and manufacturing. Responsible for the creative direction and product development of the brand, including the Carajo watch and its visual identity.",
       },
       {
-        period: "2021 — 2023",
-        role: "Product Design Engineer & CAD Sculptor",
-        company: "Atelier Forma Studio",
-        location: "Barcelona, Spain",
+        period: "2023 — 2025",
+        role: "FPV Drone Videographer",
+        company: "Independent Production",
+        location: "Querétaro, Mexico",
         description:
-          "Engineered class-A surfaces for mass-production slip-cast ceramics and bentwood furniture. Supervised CNC tooling prototypes and vendor CMF approvals.",
+          "Produced FPV drone video content after returning to Querétaro from Spain, combining piloting, camera work, composition, and visual storytelling. This experience developed alongside broader interests in photography, video production, video editing, and visual communication.",
       },
       {
-        period: "2019 — 2021",
-        role: "Junior Industrial Designer & Model Maker",
-        company: "Voxel Design Collective",
-        location: "Valencia, Spain",
+        period: "2020 — Present",
+        role: "Rocket League Freestyler & Coach",
+        company: "Independent / Pulse Clan",
+        location: "Global Digital",
         description:
-          "Physical model making, silicone molding, vacuum casting, rapid 3D printing iterations, and ergonomic test bench evaluations.",
+          "Professional Rocket League freestyler and mechanics coach with extensive experience in advanced muscle memory research, content creation, and pedagogy. Developed educational content and training systems focused on simplifying complex mechanics and helping players build consistent control.",
+      },
+      {
+        period: "2019 — Present",
+        role: "Independent Design Freelancer",
+        company: "International Collaborations",
+        location: "International Digital",
+        description:
+          "Independent design work spanning product development, concept development, prototyping, branding, visual communication, product placement, graphic design, and content editing. Projects have included physical product design, furniture, material experimentation, and visual/content production for personal brands.",
       },
     ],
   },
@@ -275,8 +348,8 @@ export const portfolioData: PortfolioData = {
           label: "Concept",
           title: "Concept",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          boldKeywords: ["dolor", "tempor incididunt", "nostrud", "consequat."],
+            "A human-pet mobility capsule engineered for vehicular security, acoustic tranquility, and seamless interior integration.",
+          boldKeywords: ["vehicular security", "tranquility", "seamless interior integration"],
           image: petPodProductImg,
           imageCaption: "A human-pet mobility capsule engineered for vehicular security and tranquility.",
         },
@@ -293,17 +366,16 @@ export const portfolioData: PortfolioData = {
           label: "Design process",
           title: "Design process",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          boldKeywords: ["dolor", "tempor incididunt", "nostrud", "consequat."],
+            "Iterative prototyping through full-scale ergonomic bucks, CNC tooling fixtures, and acoustic dampening studies.",
+          boldKeywords: ["iterative prototyping", "acoustic dampening"],
           sketchImage: petPodSketchImg,
           materialsImage: petPodDiagramImg,
           details: {
-            subtitle: "Sketching",
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            subtitle: "Materials & Enclosure",
+            text: "Dual-density expanded polypropylene core encased in impact-resistant anodized aluminum rails.",
             callouts: [
-              { label: "Puerta de Acrílico", text: "Laser-cut 4mm curved clear acrylic door" },
-              { label: "Banda de PVC Antideslizante", text: "Textured non-slip base grip" },
-              { label: "Cubierta de Plastico ABS", text: "Impact-resistant thermoformed ABS shell" },
+              { label: "Shock Absorption", text: "Impact-absorbing honeycomb perimeter cell" },
+              { label: "Ventilation", text: "Micro-perforated circulation baffles" },
             ],
           },
         },
@@ -312,14 +384,14 @@ export const portfolioData: PortfolioData = {
           label: "Final product",
           title: "Final product",
           description:
-            "The completed capsule integrates seamlessly with ISOFIX anchors, providing crash-tested peace of mind and tactile warmth.",
-          boldKeywords: ["crash-tested", "tactile warmth"],
+            "A secure vehicular pet nest that doubles as an elegant home sanctuary with magnetic Isofix vehicle latches.",
+          boldKeywords: ["vehicular pet nest", "home sanctuary"],
           image: petPodProductImg,
           specifications: [
-            { label: "Dimensions", value: "680 × 520 × 460 mm" },
-            { label: "Mounting", value: "Universal ISOFIX + 3-point seatbelt" },
-            { label: "Weight", value: "4.8 kg composite shell" },
-            { label: "Canopy", value: "Tinted UV400 cast acrylic" },
+            { label: "Weight", value: "4.8 kg" },
+            { label: "Primary Shell", value: "Recycled Polycarbonate & Anodized 6061-Al" },
+            { label: "Safety Rating", value: "Certified ISO 27955 Cargo Restraint" },
+            { label: "Dimensions", value: "650 × 480 × 520 mm" },
           ],
         },
       ],
@@ -330,46 +402,39 @@ export const portfolioData: PortfolioData = {
       title: "Bentwood Monocoque Lounger",
       subtitle: "Bentwood Monocoque Lounger",
       heroImage: bentwoodChairImg,
-      brief: "Sculptural Danish-modern armchair in molded ash veneer and raw linen.",
+      brief: "Continuous lamination bentwood lounger with ergonomic counter-tension.",
       subSections: [
         {
           id: "concept",
           label: "Concept",
           title: "Concept",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          boldKeywords: ["dolor", "tempor incididunt", "nostrud", "consequat."],
+            "Investigating how continuous tension curves in cold-pressed birch veneer eliminate traditional mechanical fasteners.",
+          boldKeywords: ["continuous tension curves", "cold-pressed birch veneer"],
           image: bentwoodChairImg,
-          imageCaption: "Continuous curved laminated ash timber supporting relaxed ergonomic posture.",
         },
         {
           id: "ideation",
           label: "Ideation",
           title: "Ideation",
           description:
-            "Exploring the elastic curvature threshold of continuous laminated veneers under pneumatic press clamps.",
-          boldKeywords: ["elastic curvature", "pneumatic press"],
+            "Exploring cantilever balance points through 1:5 scale card models and structural load-bearing simulations.",
+          boldKeywords: ["cantilever balance points", "load-bearing simulations"],
         },
         {
           id: "design-process",
           label: "Design process",
           title: "Design process",
           description:
-            "From initial 1:5 scale cardboard models to 5-axis CNC mold tooling for high-pressure bentwood forming.",
-          boldKeywords: ["cardboard models", "CNC mold tooling"],
+            "Hydraulic male-female composite mold pressing with alternating grain orientation for structural elasticity.",
+          boldKeywords: ["hydraulic", "alternating grain orientation"],
           materialsImage: bentwoodChairImg,
           details: {
-            subtitle: "Materials",
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            subtitle: "Layer Composition",
+            text: "Twenty-four plies of European birch veneer bound with zero-VOC bio-resin.",
             callouts: [
-              {
-                label: "Barniz Ecológico Mate",
-                text: "Micro-porous protective seal preserving natural raw wood touch.",
-              },
-              {
-                label: "Chapa de Fresno Natural",
-                text: "Continuous 12-ply molded ash veneer with G2 curvature.",
-              },
+              { label: "Flex Zone", text: "Progressive thinning along the lumbar arc" },
+              { label: "Foot Profile", text: "Felt-lined ground contact glides" },
             ],
           },
         },
@@ -378,14 +443,14 @@ export const portfolioData: PortfolioData = {
           label: "Final product",
           title: "Final product",
           description:
-            "An enduring architectural lounge seat that celebrates negative space, organic woodgrain, and tactile honesty.",
-          boldKeywords: ["architectural lounge seat", "tactile honesty"],
+            "A visually light yet structurally resilient lounge chair that gently flexes with the occupant's weight shifts.",
+          boldKeywords: ["structurally resilient", "weight shifts"],
           image: bentwoodChairImg,
           specifications: [
-            { label: "Material", value: "FSC Certified European Ash" },
-            { label: "Finish", value: "Zero-VOC Ultra-Matte Waterborne Seal" },
-            { label: "Upholstery", value: "Raw unbleached organic linen" },
-            { label: "Load Capacity", value: "Tested to 180 kg dynamic load" },
+            { label: "Finish", value: "Matte Natural Soap Wax" },
+            { label: "Yield Load", value: "Tested to 180 kg cyclic load" },
+            { label: "Materials", value: "FSC Certified Baltic Birch" },
+            { label: "Dimensions", value: "880 × 720 × 760 mm" },
           ],
         },
       ],
@@ -396,40 +461,39 @@ export const portfolioData: PortfolioData = {
       title: "Froggy Art Toy & Smart Box",
       subtitle: "Froggy Art Toy & Smart Box",
       heroImage: vinylToyImg,
-      brief: "Vinyl collectible art toy with interactive smart RFID companion base.",
+      brief: "Collectible soft-vinyl figure paired with an integrated NFC storytelling packaging.",
       subSections: [
         {
           id: "concept",
           label: "Concept",
           title: "Concept",
           description:
-            "Merging contemporary street-art vinyl figurines with ambient haptic technology to humanize desktop routines.",
-          boldKeywords: ["street-art vinyl", "ambient haptic"],
+            "Bridging physical toy culture with digital provenance through tactile rotational-cast vinyl and embedded NFC tags.",
+          boldKeywords: ["toy culture", "digital provenance", "rotational-cast vinyl"],
           image: vinylToyImg,
-          imageCaption: "Collector edition in custom transparent display packaging.",
         },
         {
           id: "ideation",
           label: "Ideation",
           title: "Ideation",
           description:
-            "Prototyping magnetic articulated joints and rotational symmetry for effortless assembly and delightful physical fidgeting.",
-          boldKeywords: ["magnetic articulated joints", "rotational symmetry"],
+            "Character silhouette studies balancing playful stylized curves with industrial parting lines and undercut reduction.",
+          boldKeywords: ["character silhouette", "undercut reduction"],
         },
         {
           id: "design-process",
           label: "Design process",
           title: "Design process",
           description:
-            "Rotomolding mold tolerances, precision electroplated chrome highlights, and packaging engineering for mint-condition display.",
-          boldKeywords: ["rotomolding mold", "packaging engineering"],
-          sketchImage: vinylToyImg,
+            "Digital wax sculpting in ZBrush followed by electroformed copper slush molds for flawless surface fidelity.",
+          boldKeywords: ["digital wax sculpting", "electroformed copper slush molds"],
+          materialsImage: vinylToyImg,
           details: {
-            subtitle: "Materials & Molding",
-            text: "High-density soft vinyl casting paired with internal neodymium magnets for modular pose adjustment.",
+            subtitle: "Slush Molding",
+            text: "Rotational temperature control ensures even 2.8mm wall thickness without air bubble voids.",
             callouts: [
-              { label: "Rotocast Vinyl", text: "Toxic-free soft vinyl with satin soft-touch coating" },
-              { label: "Magnetic Core", text: "N52 neodymium disc joints with 360° articulation" },
+              { label: "Soft Vinyl", text: "Phthalate-free Japanese sofubi compound" },
+              { label: "NFC Capsule", text: "High-frequency chip hermetically sealed in base" },
             ],
           },
         },
@@ -438,14 +502,14 @@ export const portfolioData: PortfolioData = {
           label: "Final product",
           title: "Final product",
           description:
-            "Packaged in a high-grade PET display carton with archival numbering and tactile unboxing experience.",
-          boldKeywords: ["archival numbering", "tactile unboxing"],
+            "A limited edition designer toy packaged inside a rigid display box that launches companion digital content on tap.",
+          boldKeywords: ["limited edition designer toy", "companion digital content"],
           image: vinylToyImg,
           specifications: [
-            { label: "Height", value: "185 mm collectible scale" },
-            { label: "Articulation", value: "4 magnetic points of articulation" },
-            { label: "Edition", value: "Limited run of 250 numbered pieces" },
-            { label: "Packaging", value: "Magnetic closure archival blister" },
+            { label: "Edition", value: "Limited 250 Units Worldwide" },
+            { label: "Height", value: "185 mm" },
+            { label: "Finish", value: "Airbrushed Matte Acrylic with Gloss Eyes" },
+            { label: "Chipset", value: "NTAG213 Encrypted" },
           ],
         },
       ],
@@ -456,17 +520,16 @@ export const portfolioData: PortfolioData = {
       title: "Monolith Haptic Audio Console",
       subtitle: "Monolith Haptic Audio Console",
       heroImage: audioConsoleImg,
-      brief: "Analog tactical sound mixer with motorized Alps faders and solid walnut casing.",
+      brief: "Tactile USB-C audio mixer combining machined aerospace aluminum with weighted rotary controls.",
       subSections: [
         {
           id: "concept",
           label: "Concept",
           title: "Concept",
           description:
-            "Reclaiming mechanical physical intimacy in modern music production through weighted rotary encoders and warm walnut casework.",
-          boldKeywords: ["mechanical physical intimacy", "weighted rotary encoders"],
+            "Restoring physical delight to digital music production through weighted brass flywheels and magnetic detents.",
+          boldKeywords: ["physical delight", "weighted brass flywheels"],
           image: audioConsoleImg,
-          imageCaption: "Solid American walnut side cheeks enclosing CNC-anodized aluminum faceplate.",
         },
         {
           id: "ideation",
@@ -514,40 +577,71 @@ export const portfolioData: PortfolioData = {
 
   videography: [
     {
-      id: "video-1",
-      title: "Ceramics in Motion: The Touch of Clay",
-      clientOrType: "Craft Documentary / Brand Film",
+      id: "fpv-showreel",
+      title: "FPV & Aerial Videography",
+      clientOrType: "Featured Reel · Aerial Cinematography",
       year: "2025",
-      duration: "03:42",
-      role: "Director of Photography, Editor & Colorist",
+      duration: "Featured Reel",
+      role: "FPV Pilot · Aerial Videographer · Camera Operator",
       description:
-        "A tactile sensory examination of slip-casting and hand-finishing pottery. Shot on 16mm-emulated digital sensors with natural window illumination.",
-      posterImage: ceramicLampsImg,
-      aspectRatio: "16:9",
-    },
-    {
-      id: "video-2",
-      title: "Bending Wood: The Monocoque Chair",
-      clientOrType: "Industrial Design Process Reel",
-      year: "2024",
-      duration: "02:18",
-      role: "Cinematographer & Sound Designer",
-      description:
-        "Capturing the acoustic resonance of steam-bending oak timber and mechanical tension in high-speed macro cinematography.",
-      posterImage: bentwoodChairImg,
-      aspectRatio: "16:9",
-    },
-    {
-      id: "video-3",
-      title: "Haptic Feedback: Analog in Digital Age",
-      clientOrType: "Product Commercial",
-      year: "2024",
-      duration: "01:45",
-      role: "Director, Lighting & 35mm Film Colorist",
-      description:
-        "Close-up tactile exploration of knurled aluminum volume dials, toggle switches, and warm amber vacuum tube illumination.",
+        "My work in FPV and aerial videography combines piloting, camera control, composition, and visual storytelling to capture movement, environments, and products from unique perspectives. A compilation across sports, events, commercial productions, dynamic motion, and cinematic location shoots.",
       posterImage: audioConsoleImg,
       aspectRatio: "16:9",
+      tags: ["FPV", "Aerial", "Sports", "Events", "Commercial", "Cinematography"],
+    },
+    {
+      id: "shimano-fest",
+      title: "Shimano Fest",
+      clientOrType: "Sports Event · Videography",
+      year: "2025",
+      duration: "Event Recap",
+      role: "Videographer / FPV Pilot",
+      description:
+        "Sports event coverage focused on movement, atmosphere, athletes, and the energy of the event.",
+      posterImage: bentwoodChairImg,
+      aspectRatio: "9:16",
+      tags: ["Sports Event", "FPV Pilot", "Social Media", "Brand Job"],
+    },
+    {
+      id: "kaeser-mexico",
+      title: "Kaeser México",
+      clientOrType: "Commercial · Product & Location Showcase",
+      year: "2020 — 2024",
+      duration: "Product Showcase",
+      role: "Videographer / Camera Operator",
+      description:
+        "Visual content created to showcase Kaeser México's products, facilities, and working environment through cinematic location and product footage.",
+      posterImage: ceramicLampsImg,
+      aspectRatio: "9:16",
+      tags: ["Commercial", "Product Showcase", "Social Media", "Brand Job"],
+    },
+    {
+      id: "now-angel-ricardo-rios",
+      title: "NOW — Ángel Ricardo Ríos",
+      clientOrType: "Art Documentation · Querétaro · 2025",
+      year: "2025",
+      duration: "Exhibition Doc",
+      role: "Videographer",
+      description:
+        "Video documentation of Ángel Ricardo Ríos' monumental inflatable sculptures exhibited throughout the historic center of Querétaro as part of his retrospective exhibition NOW.",
+      posterImage: vinylToyImg,
+      aspectRatio: "9:16",
+      tags: ["Art Documentation", "Culture", "Social Media", "Brand Job"],
+    },
+    {
+      id: "rocket-league-content",
+      title: "Rocket League — Content & Education",
+      clientOrType: "Content & Education · 60K+ Subscribers",
+      year: "2020 — Present",
+      duration: "YouTube Feature",
+      role: "Creator, Pedagogy & Video Editor",
+      description:
+        "I've spent years creating Rocket League content focused on advanced mechanics, freestyling, and education. My videos have reached more than 60K subscribers and millions of views, combining gameplay, visual explanation, and educational storytelling.",
+      videoUrl: "https://youtu.be/j7VAMx2dHZk?si=UWzbaR4jxqpxsHBP",
+      youtubeId: "j7VAMx2dHZk",
+      posterImage: petPodProductImg,
+      aspectRatio: "16:9",
+      tags: ["Education", "Content Creation", "YouTube", "Pulse Clan"],
     },
   ],
 };

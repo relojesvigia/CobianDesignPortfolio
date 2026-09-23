@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Sparkles,
   Wrench,
+  GraduationCap,
   Briefcase,
   ChevronDown,
   Mail,
@@ -13,13 +14,20 @@ import { audioFeedback } from '@/src/utils/audioFeedback';
 
 export const CVSection: React.FC = () => {
   const [selectedTool, setSelectedTool] = useState<SoftwareTool>(
-    portfolioData.cv.softwareTools[6] || portfolioData.cv.softwareTools[0]
+    portfolioData.cv.softwareTools.find((t) => t.id === 'sw') ||
+      portfolioData.cv.softwareTools[0]
   );
-  const [experienceOpen, setExperienceOpen] = useState(false);
+  const [educationOpen, setEducationOpen] = useState(true);
+  const [experienceOpen, setExperienceOpen] = useState(true);
 
   const handleToolSelect = (tool: SoftwareTool) => {
     audioFeedback.playTapClick();
     setSelectedTool(tool);
+  };
+
+  const toggleEducation = () => {
+    audioFeedback.playTapClick();
+    setEducationOpen((prev) => !prev);
   };
 
   const toggleExperience = () => {
@@ -42,8 +50,8 @@ export const CVSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Two Columns: Competencies & Software Toolkit (Unboxed, pure canvas layout) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-start mb-24">
+      {/* Two Columns: Competencies & Software Toolkit */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-start mb-20">
         {/* Left Column: Core Competencies & Abilities */}
         <div className="space-y-8">
           <div className="flex items-center gap-3">
@@ -53,12 +61,20 @@ export const CVSection: React.FC = () => {
             </h3>
           </div>
 
-          <div className="space-y-7 pt-2">
-            {portfolioData.cv.competencies.map((comp, idx) => (
-              <div key={idx} className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium text-[#251E18] text-base">
-                    {comp.title}
+          <div className="space-y-6 pt-2">
+            {portfolioData.cv.competencies.map((comp) => (
+              <div key={comp.number} className="space-y-2">
+                <div className="flex items-baseline justify-between text-sm">
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-mono text-xs text-[#8C8276] font-semibold">
+                      {comp.number} —
+                    </span>
+                    <span className="font-semibold text-[#251E18] text-base">
+                      {comp.title}
+                    </span>
+                  </div>
+                  <span className="font-mono text-xs font-semibold text-[#4A3F35]">
+                    {comp.percentage}%
                   </span>
                 </div>
                 <p className="text-xs sm:text-[13px] text-[#7A7167] leading-relaxed pb-1">
@@ -86,7 +102,7 @@ export const CVSection: React.FC = () => {
               </h3>
             </div>
             <p className="text-xs sm:text-sm text-[#7D746A]">
-              Hover or tap any program to inspect design workflows and proficiency.
+              Select any program to inspect applied technical proficiency and design workflows.
             </p>
           </div>
 
@@ -101,14 +117,14 @@ export const CVSection: React.FC = () => {
                   onMouseEnter={() => setSelectedTool(tool)}
                   className={`aspect-square rounded-xl p-2 flex flex-col items-center justify-center transition-all duration-200 cursor-pointer relative group ${
                     isSelected
-                      ? 'bg-[#EAE4DA] ring-2 ring-[#3D332A] scale-105'
+                      ? 'bg-[#EAE4DA] ring-2 ring-[#3D332A] scale-105 shadow-xs'
                       : 'bg-[#F2ECE3]/60 hover:bg-[#EAE4DA] hover:scale-[1.02]'
                   }`}
                   title={tool.name}
                 >
                   {/* App icon badge */}
                   <div
-                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg flex items-center justify-center font-bold text-sm sm:text-base shadow-xs"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg flex items-center justify-center font-bold text-xs sm:text-sm shadow-xs"
                     style={{
                       backgroundColor: tool.color,
                       color: tool.textColor,
@@ -125,7 +141,7 @@ export const CVSection: React.FC = () => {
           </div>
 
           {/* Interactive Inspection Details */}
-          <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 min-h-[70px] border-t border-[#DFD7CC]">
+          <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 min-h-[72px] border-t border-[#DFD7CC]">
             <div className="text-xs sm:text-sm text-[#463C33] leading-relaxed">
               <span className="font-bold text-[#1E1712]">{selectedTool.name}:</span>{' '}
               {selectedTool.description}
@@ -137,7 +153,57 @@ export const CVSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Professional Experience in a veeeeery subtle rounded box */}
+      {/* Education Box */}
+      <div className="mb-10 rounded-2xl border border-[#DFD7CC]/60 bg-[#EFECE6]/35 p-5 sm:p-7 shadow-[0_1px_4px_rgba(0,0,0,0.015)] transition-all">
+        <button
+          onClick={toggleEducation}
+          className="w-full flex items-center justify-between cursor-pointer py-1 hover:opacity-80 transition-opacity text-left"
+        >
+          <div className="flex items-center gap-3">
+            <GraduationCap className="w-5 h-5 text-[#8C7A6B]" />
+            <span className="font-bryndan text-3xl text-[#2B231D] tracking-tight">
+              Education
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#73695F]">
+            <span>{educationOpen ? 'Hide' : 'Show'}</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-300 ${
+                educationOpen ? 'rotate-180' : 'rotate-0'
+              }`}
+            />
+          </div>
+        </button>
+
+        {educationOpen && (
+          <div className="pt-6 pb-2 space-y-6 animate-in slide-in-from-top-2 duration-300 pl-2 sm:pl-4">
+            {portfolioData.cv.education.map((item, idx) => (
+              <div
+                key={idx}
+                className="relative pl-6 border-l-2 border-[#D4CCC0] pb-5 last:pb-0"
+              >
+                <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-[#3D332A] border-2 border-[#F6F4F0]" />
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+                  <h4 className="text-base font-bold text-[#271E18]">
+                    {item.institution}
+                  </h4>
+                  <span className="text-xs font-mono text-[#8C8277]">
+                    {item.period}
+                  </span>
+                </div>
+                <div className="text-xs font-semibold text-[#7C7165] mb-2">
+                  {item.degree} · <span className="font-normal">{item.location}</span>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5C5349] leading-relaxed max-w-2xl">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Professional Experience Box */}
       <div className="mb-20 rounded-2xl border border-[#DFD7CC]/60 bg-[#EFECE6]/35 p-5 sm:p-7 shadow-[0_1px_4px_rgba(0,0,0,0.015)] transition-all">
         <button
           onClick={toggleExperience}
@@ -167,17 +233,28 @@ export const CVSection: React.FC = () => {
                 key={idx}
                 className="relative pl-6 border-l-2 border-[#D4CCC0] pb-6 last:pb-0"
               >
-                <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-[#3D332A] border-2 border-[#F6F4F0]" />
+                <div
+                  className={`absolute -left-[7px] top-1.5 w-3 h-3 rounded-full border-2 border-[#F6F4F0] ${
+                    exp.highlight ? 'bg-[#984E29] ring-2 ring-[#984E29]/20' : 'bg-[#3D332A]'
+                  }`}
+                />
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                  <h4 className="text-base font-bold text-[#271E18]">
-                    {exp.role}
-                  </h4>
+                  <div className="flex items-baseline gap-2">
+                    <h4 className="text-base font-bold text-[#271E18]">
+                      {exp.role}
+                    </h4>
+                    {exp.company && (
+                      <span className="text-sm font-semibold text-[#8C7A6B]">
+                        — {exp.company}
+                      </span>
+                    )}
+                  </div>
                   <span className="text-xs font-mono text-[#8C8277]">
                     {exp.period}
                   </span>
                 </div>
                 <div className="text-xs font-medium text-[#7C7165] mb-2">
-                  {exp.company} · {exp.location}
+                  {exp.location}
                 </div>
                 <p className="text-xs sm:text-sm text-[#5C5349] leading-relaxed max-w-2xl">
                   {exp.description}
@@ -194,6 +271,9 @@ export const CVSection: React.FC = () => {
           <span className="font-['Montserrat',sans-serif] text-[11px] font-semibold uppercase tracking-wider text-[#8A8177] block">
             Direct Inquiries & Collaborations
           </span>
+          <p className="text-xs text-[#6B6156] mt-1">
+            {portfolioData.designer.location} · {portfolioData.designer.workMode}
+          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -203,16 +283,16 @@ export const CVSection: React.FC = () => {
             className="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-[#3A3129] hover:text-[#18130F] transition-colors"
           >
             <Mail className="w-4 h-4 text-[#8C7A6B]" />
-            <span>Email Me</span>
+            <span>{portfolioData.designer.email}</span>
           </a>
 
           <a
-            href={`tel:${portfolioData.designer.phone}`}
+            href={`tel:${portfolioData.designer.phoneRaw}`}
             onClick={() => audioFeedback.playTapClick()}
             className="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-[#3A3129] hover:text-[#18130F] transition-colors"
           >
             <Phone className="w-4 h-4 text-[#8C7A6B]" />
-            <span>Phone</span>
+            <span>{portfolioData.designer.phoneRaw}</span>
           </a>
 
           <a

@@ -160,9 +160,23 @@ export default function App() {
                 {/* Bullet text with bold keywords (doubled size) */}
                 <div className="pl-1 sm:pl-2">
                   {renderIntroText()}
-                  <p className="pl-7 sm:pl-9 text-sm sm:text-base text-[#736A61] italic mt-6 font-serif leading-relaxed max-w-2xl">
-                    Industrial designer passionate about tactile material honesty, human-centered ergonomics, and minimal forms that quietly elevate everyday rituals.
+                  <p className="pl-7 sm:pl-9 text-base sm:text-lg text-[#6E6459] mt-6 leading-relaxed max-w-3xl font-normal">
+                    {portfolioData.designer.secondaryBio}
                   </p>
+
+                  {/* Three sides of practice from the portfolio positioning */}
+                  <div className="pl-7 sm:pl-9 mt-12 pt-8 border-t border-[#DFD7CC]/60 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+                    {portfolioData.designer.practicePillars.map((pillar) => (
+                      <div key={pillar.category}>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8C8276] block mb-1.5 font-mono">
+                          {pillar.category}
+                        </span>
+                        <p className="text-xs text-[#524941] leading-relaxed">
+                          {pillar.items}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </section>
 

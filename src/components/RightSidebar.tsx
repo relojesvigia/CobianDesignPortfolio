@@ -209,10 +209,10 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({
         <div className="pt-2 mt-1 border-t border-[#DFD9CE]/70 flex items-center justify-between text-[10px] text-[#8C8379]">
           <span
             onClick={() => handleItemClick('the-designer')}
-            className="cursor-pointer hover:text-[#2A221C] transition-colors"
+            className="cursor-pointer hover:text-[#2A221C] transition-colors font-medium"
             title="Scroll all the way to top"
           >
-            Pablo Cobian
+            {portfolioData.designer.name}
           </span>
           <span className="font-mono tabular-nums font-medium text-[#4A3F35]">
             {Math.round(scrollPercent)}%

@@ -21,16 +21,21 @@ export const ContactSection: React.FC = () => {
     <footer id="contact-section" className="pt-36 sm:pt-48 pb-40 border-t border-[#DFD7CC]/70 mt-36 scroll-mt-24">
       <div id="contact-details" className="max-w-3xl mx-auto px-4 sm:px-6">
         {/* Title */}
-        <div className="text-center mb-20">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8C8276] block mb-3">
+        <div className="text-center mb-16">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8C8276] block mb-3 font-mono">
             Get In Touch
           </span>
-          <h2 className="font-bryndan text-6xl sm:text-7xl text-[#221B16] tracking-tight mb-5">
+          <h2 className="font-bryndan text-6xl sm:text-7xl text-[#221B16] tracking-tight mb-4">
             Let&apos;s collaborate
           </h2>
-          <p className="text-base text-[#6E645A] max-w-lg mx-auto leading-relaxed">
-            Open for industrial design commissions, CAD modeling, CMF development, and creative videography projects worldwide.
+          <p className="text-base text-[#6E645A] max-w-lg mx-auto leading-relaxed mb-3">
+            Open for industrial design commissions, CAD modeling, CMF development, branding, and creative videography projects.
           </p>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#8A8177] bg-[#EAE4DA]/50 px-4 py-1.5 rounded-full">
+            <span>Studio Base: {portfolioData.designer.location}</span>
+            <span>·</span>
+            <span>{portfolioData.designer.workMode}</span>
+          </div>
         </div>
 
         {/* Direct Contact Links (Unboxed minimal row) */}
