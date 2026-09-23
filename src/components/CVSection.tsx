@@ -191,12 +191,9 @@ export const CVSection: React.FC = () => {
       {/* Direct Inquiries & Collaborations (Unboxed minimal row) */}
       <div className="border-t border-[#DFD7CC] pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8A8177] block mb-1">
+          <span className="font-['Montserrat',sans-serif] text-[11px] font-semibold uppercase tracking-wider text-[#8A8177] block">
             Direct Inquiries & Collaborations
           </span>
-          <h4 className="font-bryndan text-3xl text-[#281F18]">
-            Let&apos;s build something exceptional
-          </h4>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 sm:gap-4">
